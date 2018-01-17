@@ -1,12 +1,14 @@
 import json
 import re
 import warnings
+import os
 import logging
+import pkgutil
 import pkg_resources
 
 import requests
 
-from bs4 import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 
 logger = logging.getLogger(name=__name__)
 
@@ -53,7 +55,7 @@ class WebPage(object):
         """
         Parse the HTML with BeautifulSoup to find <script> and <meta> tags.
         """
-        self.parsed_html = soup = BeautifulSoup(self.html, 'html.parser')
+        self.parsed_html = soup = BeautifulSoup(self.html)
         self.scripts = [script['src'] for script in
                         soup.findAll('script', src=True)]
         self.meta = {
@@ -63,7 +65,7 @@ class WebPage(object):
         }
 
     @classmethod
-    def new_from_url(cls, url, verify=True):
+    def new_from_url(cls, url, verify=True, timeout=30):
         """
         Constructs a new WebPage object for the URL,
         using the `requests` module to fetch the HTML.
@@ -74,7 +76,7 @@ class WebPage(object):
         url : str
         verify: bool
         """
-        response = requests.get(url, verify=verify, timeout=2.5)
+        response = requests.get(url, verify=verify, timeout=timeout)
         return cls.new_from_response(response)
 
     @classmethod
@@ -95,7 +97,6 @@ class Wappalyzer(object):
     """
     Python Wappalyzer driver.
     """
-
     def __init__(self, categories, apps):
         """
         Initialize a new Wappalyzer instance.
@@ -196,7 +197,6 @@ class Wappalyzer(object):
         for regex in app['url']:
             if regex.search(webpage.url):
                 return True
-
         for name, regex in list(app['headers'].items()):
             if name in webpage.headers:
                 content = webpage.headers[name]
@@ -266,9 +266,6 @@ class Wappalyzer(object):
         return detected_apps
 
     def analyze_with_categories(self, webpage):
-        """
-        Return a list of applications and categories that can be detected on the web page.
-        """
         detected_apps = self.analyze(webpage)
         categorised_apps = {}
 
