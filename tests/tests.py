@@ -13,15 +13,15 @@ class WebPageTestCase(TestCase):
 
         webpage = WebPage.new_from_url('http://example.com/')
 
-        self.assertEquals(webpage.html, 'snerble')
+        self.assertEqual(webpage.html, 'snerble')
 
 
 class WappalyzerTestCase(TestCase):
     def test_latest(self):
         analyzer = Wappalyzer.latest()
 
-        print analyzer.categories
-        self.assertEquals(analyzer.categories['1'], 'cms')
+        print(analyzer.categories)
+        self.assertEqual(analyzer.categories['1'], 'cms')
         self.assertIn('Apache', analyzer.apps)
 
     def test_analyze_no_apps(self):
@@ -30,7 +30,7 @@ class WappalyzerTestCase(TestCase):
 
         detected_apps = analyzer.analyze(webpage)
 
-        self.assertEquals(detected_apps, set())
+        self.assertEqual(detected_apps, set())
 
     def test_get_implied_apps(self):
         analyzer = Wappalyzer(categories={}, apps={
@@ -47,7 +47,7 @@ class WappalyzerTestCase(TestCase):
 
         implied_apps = analyzer._get_implied_apps('a')
 
-        self.assertEquals(implied_apps, set(['a', 'b', 'c']))
+        self.assertEqual(implied_apps, set(['a', 'b', 'c']))
 
     def test_get_analyze_with_categories(self):
         webpage = WebPage('http://example.com', '<html>aaa</html>', {})
@@ -64,4 +64,4 @@ class WappalyzerTestCase(TestCase):
 
         result = analyzer.analyze_with_categories(webpage)
 
-        self.assertEquals(result, {"a": {"categories": ["cat1"]}})
+        self.assertEqual(result, {"a": {"categories": ["cat1"]}})

@@ -43,7 +43,7 @@ class WebPage(object):
         self.headers = headers
 
         try:
-            self.headers.keys()
+            list(self.headers.keys())
         except AttributeError:
             raise ValueError("Headers must be a dictionary-like object")
 
@@ -111,7 +111,7 @@ class Wappalyzer(object):
         self.categories = categories
         self.apps = apps
 
-        for name, app in self.apps.items():
+        for name, app in list(self.apps.items()):
             self._prepare_app(app)
 
     @classmethod
@@ -158,7 +158,7 @@ class Wappalyzer(object):
         # Ensure keys are lowercase
         for key in ['headers', 'meta']:
             obj = app[key]
-            app[key] = {k.lower(): v for k, v in obj.items()}
+            app[key] = {k.lower(): v for k, v in list(obj.items())}
 
         # Prepare regular expression patterns
         for key in ['url', 'html', 'script']:
@@ -166,7 +166,7 @@ class Wappalyzer(object):
 
         for key in ['headers', 'meta']:
             obj = app[key]
-            for name, pattern in obj.items():
+            for name, pattern in list(obj.items()):
                 obj[name] = self._prepare_pattern(obj[name])
 
     def _prepare_pattern(self, pattern):
@@ -197,7 +197,7 @@ class Wappalyzer(object):
             if regex.search(webpage.url):
                 return True
 
-        for name, regex in app['headers'].items():
+        for name, regex in list(app['headers'].items()):
             if name in webpage.headers:
                 content = webpage.headers[name]
                 if regex.search(content):
@@ -208,7 +208,7 @@ class Wappalyzer(object):
                 if regex.search(script):
                     return True
 
-        for name, regex in app['meta'].items():
+        for name, regex in list(app['meta'].items()):
             if name in webpage.meta:
                 content = webpage.meta[name]
                 if regex.search(content):
@@ -257,7 +257,7 @@ class Wappalyzer(object):
         """
         detected_apps = set()
 
-        for app_name, app in self.apps.items():
+        for app_name, app in list(self.apps.items()):
             if self._has_app(app, webpage):
                 detected_apps.add(app_name)
 
