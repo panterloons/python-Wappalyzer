@@ -1,10 +1,6 @@
 python-Wappalyzer
 =================
 
-#[![Build Status](https://travis-ci.org/chorsley/python-Wappalyzer.svg?branch=master)](https://travis-ci.org/chorsley/python-Wappalyzer)
-#[![PyPI version](https://badge.fury.io/py/python-Wappalyzer.svg)](https://badge.fury.io/py/python-Wappalyzer)
-#[![Coverage Status](https://coveralls.io/repos/github/chorsley/python-Wappalyzer/badge.svg?branch=master)](https://coveralls.io/github/chorsley/python-Wappalyzer?branch=master)
-
 ```
 pip install git+https://github.com/panterloons/python-Wappalyzer 
 ```
