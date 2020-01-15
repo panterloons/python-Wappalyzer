@@ -8,8 +8,6 @@ pip install git+https://github.com/panterloons/python-Wappalyzer
 Python driver for [Wappalyzer][], a web application
 detection utility.
 
-    $ pip install python-Wappalyzer
-
     >>> from Wappalyzer import Wappalyzer, WebPage
     >>> wappalyzer = Wappalyzer.latest()
     >>> webpage = WebPage.new_from_url('http://example.com')
