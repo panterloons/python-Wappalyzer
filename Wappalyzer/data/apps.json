@@ -1,4 +1,5 @@
 {
+  "$schema": "../schema.json",
   "apps": {
     "1C-Bitrix": {
       "cats": [
@@ -10711,7 +10712,11 @@
       "cookies": {
         "sf_redirect": ""
       },
+<<<<<<< HEAD
       "html": "(?:<div class=\"sf-toolbar[^>]+?>[^]+<span class=\"sf-toolbar-value\">([\\d.])+|<div id=\"sfwdt[^\"]+\" class=\"[^\"]*sf-toolbar\\;version:\\1",
+=======
+      "html": "(?:<div class=\"sf-toolbar[^>]+?>[^]+<span class=\"sf-toolbar-value\">([\\d.])+|<div id=\"sfwdt[^\"]+\" class=\"[^\"]*sf-toolbar)\\;version:\\1",
+>>>>>>> bbe6d1a5795957e22ffd30521b8b355c8ed3ba7a
       "js": {
         "Sfjs": ""
       },
