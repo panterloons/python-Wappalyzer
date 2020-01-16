@@ -55,7 +55,7 @@ class WebPage(object):
         """
         Parse the HTML with BeautifulSoup to find <script> and <meta> tags.
         """
-        self.parsed_html = soup = BeautifulSoup(self.html, "lxml")
+        self.parsed_html = soup = BeautifulSoup(self.html, features="html.parser")
         self.scripts = [script['src'] for script in
                         soup.findAll('script', src=True)]
         self.meta = {
